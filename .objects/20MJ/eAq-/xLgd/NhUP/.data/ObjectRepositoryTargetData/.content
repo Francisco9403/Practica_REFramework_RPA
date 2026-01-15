@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-16"?>
+<ObjectRepositoryTargetData ContentHash="KG3MgKy3sE-RVz8GJgpAgg" Reference="9y9_HLFZg0OL43Qc3FIHiw/NhUPxF4SB0Soz9Vpem2c_Q" xmlns="http://schemas.uipath.com/workflow/activities/uix" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <ObjectRepositoryTargetData.Data>
+    <TargetAnchorable x:Key="TargetAnchorable" BrowserURL="listado.mercadolibre.com.ar/iphone-15" CVScreenId="63443581-6a95-4c02-a48e-5bd827fabe2c" CvType="AnyWordGroup" DesignTimeRectangle="413, 426, 131, 34" ElementType="Icon" ElementVisibilityArgument="Interactive" FuzzySelectorArgument="&lt;ctrl name='Iphone 15 | MercadoLibre ??' role='document' matching:name='fuzzy' fuzzylevel:name='0.0' /&gt;&lt;ctrl role='graphic' automationid='' matching:automationid='fuzzy' fuzzylevel:automationid='0.0' /&gt;" Guid="bd9e6882-8c65-4df9-9121-35a0e6f059f8" ScopeSelectorArgument="&lt;wnd app='chrome.exe' cls='Chrome_WidgetWin_1' title='Iphone 15 | MercadoLibre  - Google Chrome' /&gt;" SearchSteps="FuzzySelector, CV" SelectionStrategy="AA" Version="V6" WaitForReadyArgument="Interactive">
+      <TargetAnchorable.Anchors>
+        <scg:List x:TypeArguments="ITarget" Capacity="4">
+          <Target CVScreenId="63443581-6a95-4c02-a48e-5bd827fabe2c" DesignTimeRectangle="413, 457, 175, 23" ElementType="Text" FuzzySelectorArgument="&lt;ctrl name='Iphone 15 | MercadoLibre ??' role='document' matching:name='fuzzy' fuzzylevel:name='0.0' /&gt;&lt;ctrl name='Mismo precio 6 cuotas de ' role='text' automationid='' matching:name='fuzzy' fuzzylevel:name='0.0' matching:automationid='fuzzy' fuzzylevel:automationid='0.0' check:text='Mismo precio 6 cuotas de' /&gt;" Guid="3b197c31-b2c5-4ca4-9a38-9a58ebb57318" SearchSteps="FuzzySelector" />
+        </scg:List>
+      </TargetAnchorable.Anchors>
+      <imageRef attrName="InformativeScreenshot" originalValue="a03b91da61083879d241199b3873660a.png" xmlns="">0DsCpVyAm40aejY0exUVMGA</imageRef>
+    </TargetAnchorable>
+    <x:String x:Key="ActivityType">GetText</x:String>
+  </ObjectRepositoryTargetData.Data>
+</ObjectRepositoryTargetData>

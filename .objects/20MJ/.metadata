@@ -1,0 +1,12 @@
+﻿{
+  "Name": "Chrome Mercado Libre Argentina - Envíos Gratis en el día",
+  "Type": "App",
+  "Id": "20MJeqgzsEGQCWi3SJJP0A",
+  "Reference": "9y9_HLFZg0OL43Qc3FIHiw/20MJeqgzsEGQCWi3SJJP0A",
+  "Created": "2026-01-15T13:38:06.2639945Z",
+  "Updated": "2026-01-15T13:38:06.2639945Z",
+  "CreatedBy": [
+    "UiPath.UIAutomationCore, Version=25.10.22.0, Culture=neutral, PublicKeyToken=null",
+    "UiPath.Platform, Version=25.10.1.0, Culture=neutral, PublicKeyToken=null"
+  ]
+}

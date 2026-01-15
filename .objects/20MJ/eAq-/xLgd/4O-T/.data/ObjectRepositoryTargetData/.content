@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-16"?>
+<ObjectRepositoryTargetData ContentHash="UJc5p2vR8k61INZIKGi6SQ" xmlns="http://schemas.uipath.com/workflow/activities/uix" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <ObjectRepositoryTargetData.Data>
+    <TargetAnchorable x:Key="TargetAnchorable" BrowserURL="mercadolibre.com.ar" CVScreenId="3c1a51be-7b1a-4711-81ad-7d032625b87d" CvElementArea="350, 102, 642, 46" CvType="InputBox" DesignTimeRectangle="352, 104, 646, 44" ElementType="InputBox" ElementVisibilityArgument="Interactive" FullSelectorArgument="&lt;webctrl tag='INPUT' /&gt;" Guid="20dc7e56-f934-450d-bead-e23de03a31f4" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Mercado Libre Argentina - Envíos Gratis en el día' /&gt;" SearchSteps="Selector, CV" Version="V6" WaitForReadyArgument="Interactive">
+      <TargetAnchorable.Anchors>
+        <scg:List x:TypeArguments="ITarget" Capacity="4">
+          <Target CVScreenId="3c1a51be-7b1a-4711-81ad-7d032625b87d" CvElementArea="350, 102, 642, 46" CvType="InputBox" DesignTimeRectangle="948, 114, 50, 23" FullSelectorArgument="&lt;webctrl aria-role='img' tag='DIV' /&gt;" Guid="733859f7-3183-458f-98a2-18d86de972f1" SearchSteps="Selector, CV" />
+        </scg:List>
+      </TargetAnchorable.Anchors>
+      <imageRef attrName="InformativeScreenshot" originalValue="02ead0ef12221feaa4c84f035238d806.png" xmlns="">0blPXYC1MWkmvkwyZMxHEAw</imageRef>
+    </TargetAnchorable>
+    <x:String x:Key="ActivityType">TypeInto</x:String>
+  </ObjectRepositoryTargetData.Data>
+</ObjectRepositoryTargetData>

@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Process" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Process" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Drawing;assembly=System.Drawing.Common" xmlns:sd1="clr-namespace:System.Drawing;assembly=System.Drawing.Primitives" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property sap2010:Annotation.AnnotationText="Transaction item to be processed." Name="in_TransactionItem" Type="InArgument(ui:QueueItem)" />
     <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
@@ -47,6 +47,11 @@
       <x:String>UiPath.Platform.SyncObjects</x:String>
       <x:String>System.ComponentModel</x:String>
       <x:String>UiPath.UIAutomationNext.Models</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Numerics</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities.Models</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.UIAutomationNext.Models.ExtractData</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -104,16 +109,140 @@
       <AssemblyReference>UiPath.Platform</AssemblyReference>
       <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
       <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>NPOI.Core</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="967,475.65666666666664" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="939,2390" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="str_Producto" />
+      <Variable x:TypeArguments="x:Decimal" Name="dec_Presupuesto" />
+    </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log Message Process Start" sap:VirtualizedContainerService.HintSize="450,175" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Iniciando procesamiento de transacción...&quot;]" />
-    <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="450,114" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="Simulando trabajo complejo en el sistema..." />
+    <Assign sap:VirtualizedContainerService.HintSize="488,175" sap2010:WorkflowViewState.IdRef="Assign_1">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[str_Producto]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[in_TransactionItem.SpecificContent("Producto").ToString]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign sap:VirtualizedContainerService.HintSize="488,175" sap2010:WorkflowViewState.IdRef="Assign_2">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:Decimal">[dec_Presupuesto]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:Decimal">[CDec(in_TransactionItem.SpecificContent("Presupuesto"))]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <uix:NApplicationCard AttachMode="ByInstance" CloseMode="[UiPath.UIAutomationNext.Enums.NAppCloseMode.Always]" DisplayName="Chrome Mercado Libre Argentina - Envíos Grati" HealingAgentBehavior="Job" sap:VirtualizedContainerService.HintSize="488,1940" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InteractionMode="DebuggerApi" ScopeGuid="08b7f2b8-c1cd-4614-86c0-2a32633f1f90" Version="V2">
+      <uix:NApplicationCard.Body>
+        <ActivityAction x:TypeArguments="x:Object">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="486,1746" sap2010:WorkflowViewState.IdRef="Sequence_2">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="x:String" Name="str_PrecioBruto" />
+              <Variable x:TypeArguments="x:String" Name="str_PrecioLimpio" />
+              <Variable x:TypeArguments="x:Decimal" Name="dec_PrecioReal" />
+            </Sequence.Variables>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="Single" ClipboardMode="Never" DisplayName="Type Into 'DIV'" EmptyFieldMode="SingleLine" HealingAgentBehavior="SameAsCard" sap:VirtualizedContainerService.HintSize="452,250" sap2010:WorkflowViewState.IdRef="NTypeInto_1" InteractionMode="SameAsCard" ScopeIdentifier="08b7f2b8-c1cd-4614-86c0-2a32633f1f90" Text="[str_Producto]" Version="V5">
+              <uix:NTypeInto.Target>
+                <uix:TargetAnchorable BrowserURL="mercadolibre.com.ar" CVScreenId="3c1a51be-7b1a-4711-81ad-7d032625b87d" ContentHash="UJc5p2vR8k61INZIKGi6SQ" CvElementArea="350, 102, 642, 46" CvType="InputBox" DesignTimeRectangle="352, 104, 646, 44" ElementType="InputBox" ElementVisibilityArgument="Interactive" FullSelectorArgument="&lt;webctrl tag='INPUT' /&gt;" Guid="20dc7e56-f934-450d-bead-e23de03a31f4" InformativeScreenshot="02ead0ef12221feaa4c84f035238d806.png" Reference="9y9_HLFZg0OL43Qc3FIHiw/4O-TNiN-k0yM9AP_RcXVOA" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Mercado Libre Argentina - Envíos Gratis en el día' /&gt;" SearchSteps="Selector, CV" Version="V6" WaitForReadyArgument="Interactive">
+                  <uix:TargetAnchorable.Anchors>
+                    <scg:List x:TypeArguments="uix:ITarget" Capacity="4">
+                      <uix:Target CVScreenId="3c1a51be-7b1a-4711-81ad-7d032625b87d" CvElementArea="350, 102, 642, 46" CvType="InputBox" DesignTimeRectangle="948, 114, 50, 23" FullSelectorArgument="&lt;webctrl aria-role='img' tag='DIV' /&gt;" Guid="733859f7-3183-458f-98a2-18d86de972f1" SearchSteps="Selector, CV" />
+                    </scg:List>
+                  </uix:TargetAnchorable.Anchors>
+                </uix:TargetAnchorable>
+              </uix:NTypeInto.Target>
+            </uix:NTypeInto>
+            <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click 'DIV(1)'" HealingAgentBehavior="SameAsCard" sap:VirtualizedContainerService.HintSize="452,198" sap2010:WorkflowViewState.IdRef="NClick_1" InteractionMode="SameAsCard" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="08b7f2b8-c1cd-4614-86c0-2a32633f1f90" Version="V5">
+              <uix:NClick.Target>
+                <uix:TargetAnchorable BrowserURL="mercadolibre.com.ar" CVScreenId="8209bac0-40c9-449e-980a-87a1c7aa5f31" ContentHash="yOg3E53xykSszo9MJsMfyw" CvElementArea="350, 102, 642, 46" CvType="InputBox" DesignTimeRectangle="948, 114, 50, 23" ElementVisibilityArgument="Interactive" FullSelectorArgument="&lt;webctrl aria-role='img' tag='DIV' /&gt;" Guid="693f7d64-05c1-406d-8743-2d2e238457ad" InformativeScreenshot="9b4e141789632c69982486c274208a3e.png" Reference="9y9_HLFZg0OL43Qc3FIHiw/gcqMA_D420C3cRHBMjly8A" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Mercado Libre Argentina - Envíos Gratis en el día' /&gt;" SearchSteps="Selector, CV" Version="V6" WaitForReadyArgument="Interactive" />
+              </uix:NClick.Target>
+            </uix:NClick>
+            <uix:NGetText DisplayName="Get Text" HealingAgentBehavior="SameAsCard" sap:VirtualizedContainerService.HintSize="452,147" sap2010:WorkflowViewState.IdRef="NGetText_4" ScopeIdentifier="08b7f2b8-c1cd-4614-86c0-2a32633f1f90" TextString="[str_PrecioBruto]" Version="V5">
+              <uix:NGetText.Target>
+                <uix:TargetAnchorable DesignTimeRectangle="0, 0, 0, 0" FullSelectorArgument="&lt;webctrl class='*andes-money-amount__fraction*' tag='SPAN' idx='1' /&gt;" Guid="f3626d52-c26d-4b25-899b-334de420591a" ScopeSelectorArgument="&lt;html app='chrome.exe' title='Iphone 15 | MercadoLibre ??' /&gt;" SearchSteps="Selector" Version="V6" WaitForReadyArgument="[UiPath.UIAutomationNext.Enums.NWaitForReady.Complete]" />
+              </uix:NGetText.Target>
+            </uix:NGetText>
+            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="452,179" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;El precio encontrado es: &quot; + str_PrecioBruto]" />
+            <Assign sap:VirtualizedContainerService.HintSize="452,179" sap2010:WorkflowViewState.IdRef="Assign_3">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[str_PrecioLimpio]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[str_PrecioBruto.Replace(".", "").Trim]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <Assign sap:VirtualizedContainerService.HintSize="452,179" sap2010:WorkflowViewState.IdRef="Assign_4">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:Decimal">[dec_PrecioReal]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:Decimal">[CDec(str_PrecioLimpio)]</InArgument>
+              </Assign.Value>
+            </Assign>
+            <If Condition="[dec_PrecioReal &gt; dec_Presupuesto]" sap:VirtualizedContainerService.HintSize="452,550" sap2010:WorkflowViewState.IdRef="If_1">
+              <If.Then>
+                <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="450,182" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <Throw Exception="[New BusinessRuleException(&quot;Muy caro. Precio: &quot; + dec_PrecioReal.ToString + &quot; vs Presupuesto: &quot; + dec_Presupuesto.ToString)]" sap:VirtualizedContainerService.HintSize="416,118" sap2010:WorkflowViewState.IdRef="Throw_1" />
+                </Sequence>
+              </If.Then>
+              <If.Else>
+                <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="450,234" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="416,170" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;¡COMPRA APROBADA! El precio &quot; + dec_PrecioReal.ToString + &quot; entra en el presupuesto.&quot;]" />
+                </Sequence>
+              </If.Else>
+            </If>
+          </Sequence>
+        </ActivityAction>
+      </uix:NApplicationCard.Body>
+      <uix:NApplicationCard.OCREngine>
+        <ActivityFunc x:TypeArguments="sd:Image, scg:IEnumerable(scg:KeyValuePair(sd1:Rectangle, x:String))">
+          <ActivityFunc.Argument>
+            <DelegateInArgument x:TypeArguments="sd:Image" Name="Image" />
+          </ActivityFunc.Argument>
+        </ActivityFunc>
+      </uix:NApplicationCard.OCREngine>
+      <uix:NApplicationCard.TargetApp>
+        <uix:TargetApp Area="-8, -8, 1616, 876" BrowserType="Chrome" ContentHash="GYVYFXzMXEqtfP60035-iw" IconBase64="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" InformativeScreenshot="1b7b909e19ebd28fe5341c73bf1b4738.jpg" Reference="9y9_HLFZg0OL43Qc3FIHiw/xLgdYWvRl0Sjv0wt5yaRTw" Selector="&lt;html app='chrome.exe' title='Mercado Libre Argentina - Envíos Gratis en el día' /&gt;" Url="https://www.mercadolibre.com.ar/" Version="V2">
+          <uix:TargetApp.Arguments>
+            <InArgument x:TypeArguments="x:String" />
+          </uix:TargetApp.Arguments>
+          <uix:TargetApp.WorkingDirectory>
+            <InArgument x:TypeArguments="x:String" />
+          </uix:TargetApp.WorkingDirectory>
+        </uix:TargetApp>
+      </uix:NApplicationCard.TargetApp>
+    </uix:NApplicationCard>
   </Sequence>
 </Activity>
